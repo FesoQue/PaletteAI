@@ -1,40 +1,19 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useColorData } from "@/hooks/useColorData";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("");
   const [result, setResult] = useState();
 
-  const handleSubmit = async (e) => {
+  const { isLoading, data, isError, error, refetch, isFetching } =
+    useColorData(colorCode);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ color: colorCode }),
-      });
-
-      const data = await response.json();
-      if (response.status !== 200) {
-        throw (
-          data.error ||
-          new Error(`Request failed with status ${response.status}`)
-        );
-      }
-      // console.log(data.result);
-      setResult(data.result);
-      setColorCode("");
-    } catch (error) {
-      // Consider implementing your own error handling logic here
-      console.error(error);
-      alert(error.message);
-    }
+    refetch();
+    setColorCode("");
   };
-
-  const aaa = result.split("\n");
-  console.log(aaa);
+  const disable = !colorCode || isFetching;
 
   return (
     <main className="p-8">
@@ -48,13 +27,23 @@ const Index = () => {
           onChange={(e) => setColorCode(e.target.value)}
         />
         <button
-          // disabled={colorCode === ""}
+          disabled={disable}
           type="submit"
-          className="bg-[#10A37F] w-full h-[48px] rounded text-center text-white"
+          className={`bg-[#10A37F] w-full h-[48px] rounded text-center text-white ${
+            disable && "cursor-not-allowed opacity-50"
+          }`}
         >
           Generate Color Guide
         </button>
       </form>
+
+      <div>
+        {isFetching && (
+          <h1 className="text-2xl font-semibold text-center mt-4">
+            Loading...
+          </h1>
+        )}
+      </div>
     </main>
   );
 };
