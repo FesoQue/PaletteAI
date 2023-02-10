@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  position: relative;
+  /* background-image: radial-gradient(
+      at 100% 40%,
+      rgba(129, 100, 244, 0.2) 0px,
+      transparent 40%
+    ),
+    radial-gradient(at 90% -80%, rgba(252, 165, 165, 0.2) 0px, transparent 50%); */
+  /* background-image: url("../../public/beams_gradient.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.008) 0.1em,
+      transparent 0.1em
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.008) 0.1em, transparent 0.1em);
+  background-size: 2em 2em;
+  z-index: -1;
+}

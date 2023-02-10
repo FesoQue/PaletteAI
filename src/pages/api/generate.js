@@ -48,21 +48,24 @@ export default async function handler(req, res) {
 }
 
 function generatePrompt(color) {
-  return `suggest a color system based on any color below with name and hex code. it must include primary color, primary variant, secondary color , secondary variant, Neutral,  background , tint color, shade color, success color, warning color, error color and a matching gradient color\n
+  return `suggest a color system based on any color below with name and hex code. it must include primary color, primary variant, secondary color , secondary variant, Neutral,  background , tint color, shade color, success color, warning color and an error color.
 
 Color: green
-Guide: Primary Color: #009933 (Green),
+Guide:Primary Color: #009933 (Green),
 Primary Variant: #00CC66 (Light Green),
 Secondary Color: #006600 (Dark Green),
 Secondary Variant: #00FF99 (Mint Green),
+Supporting Color: #2E8B57 (Sea Green),
 Neutral: #999999 (Gray),
 Background: #F2F2F2 (Light Gray),
 Tint Color: #00FFCC (Turquoise),
 Shade Color: #003300 (Very Dark Green),
 Success Color: #00CC00 (Bright Green),
 Warning Color: #FFFF00 (Yellow),
-Error Color: #FF0000 (Red),
-Matching Gradient Color: linear-gradient(to right, #009933, #00CC00)
+Error Color: #FF0000 (Red)
 Color: ${color}
 Guide:`;
 }
+
+// suggest a color system based on any color below with name and hex code. it must include primary color, primary variant, secondary color , secondary variant, Neutral,  background , tint color, shade color, success color, warning color and a error color and a matching gradient color\n
+// Matching Gradient Color: linear-gradient(to right, #009933, #00CC00),

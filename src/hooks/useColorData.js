@@ -22,10 +22,12 @@ const fetchColorData = async (colorCode) => {
   }
 };
 
-export const useColorData = (colorCode) => {
+export const useColorData = (colorCode, onError) => {
   return useQuery({
-    queryKey: ["color", colorCode],
+    queryKey: ["color"],
     queryFn: () => fetchColorData(colorCode),
     enabled: false,
+    useErrorBoundary: true,
+    onError: onError,
   });
 };
