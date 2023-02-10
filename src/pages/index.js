@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 import ErrorHandler from "@/helper/ErrorHandler";
 import { defaultData } from "@/data/defaultdata";
+import { Search } from "@/components/Search";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
@@ -17,19 +18,55 @@ const Index = () => {
     onError
   );
 
-  const disable = !colorCode || isFetching;
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    refetch();
+    // refetch();
   };
 
   function convertHexToRgba(hex) {
     const r = parseInt(hex.substring(1, 3), 16);
     const g = parseInt(hex.substring(3, 5), 16);
     const b = parseInt(hex.substring(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b})`;
+    return `rgb(${r}, ${g}, ${b})`;
   }
+
+  function validateColorCode(colorCode) {
+    if (colorCode.startsWith("#")) {
+      // validate hex code. support 3 and 6 hex code
+      if (
+        /^#[0-9A-F]{6}$/i.test(colorCode) ||
+        /^#[0-9A-F]{3}$/i.test(colorCode)
+      ) {
+        return true;
+      }
+    } else if (colorCode.startsWith("rgb")) {
+      // validate rgb code
+      let splitCode = colorCode.split(",");
+      if (splitCode.length === 3) {
+        for (let i = 0; i < 3; i++) {
+          let value = parseInt(splitCode[i].trim());
+          if (value < 0 || value > 255) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  function isColor(strColor) {
+    var s = new Option().style;
+    s.color = strColor;
+    return s.color == strColor;
+  }
+
+  const disable =
+    !colorCode ||
+    (colorCode && !validateColorCode(colorCode)) ||
+    isColor(colorCode) ||
+    isFetching;
 
   function clickToCopy(text) {
     let textArea = document.createElement("textarea");
@@ -43,37 +80,47 @@ const Index = () => {
   return (
     <main className="max-w-[1100px] mx-auto py-20">
       <div className="text-center mb-8">
-        <h1 className="text-5xl font-semibold mb-1">
+        <h1 className="text-5xl font-bold mb-1">
           Palette<span className="text-[#10A37F]">AI</span>.
         </h1>
-        <p className="text-xl">Create a color palette using AI.</p>
+        <p className="text-[18px]">Create a color palette using AI.</p>
       </div>
-      <form onSubmit={handleSubmit} className="max-w-xl mx-auto mb-20 px-10">
-        <input
-          type="text"
-          name="color_code"
-          placeholder="#20262E"
-          className="block border-1 border outline-none border-gray-500 w-full mb-3 h-[48px] rounded px-2"
-          value={colorCode}
-          onChange={(e) => setColorCode(e.target.value)}
-        />
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-xl mx-auto mb-20 px-10"
+        autoComplete="off"
+      >
+        <div className="input border-gray-500 w-full mb-6 h-[51px] rounded-[12px] border-1 border bg-whiter flex items-center hover:transition-all ease-in-out">
+          <span className="h-full flex items-center px-3 text-gray-500">
+            <Search />
+          </span>
+          <input
+            type="text"
+            required
+            name="color_code"
+            placeholder="#FFFAEF"
+            className="outline-none border-none h-full w-full bg-transparent"
+            value={colorCode}
+            onChange={(e) => setColorCode(e.target.value)}
+          />
+        </div>
         <button
+          class={`pushable w-full ${disable && "opacity-50"}`}
+          style={{ cursor: disable && "not-allowed" }}
           disabled={disable}
-          type="submit"
-          className={`bg-[#10A37F] w-full h-[48px] rounded text-center text-white capitalize font-semibold text-xl ${
-            disable && "cursor-not-allowed opacity-50"
-          }`}
         >
-          {isFetching ? (
-            <ClipLoader
-              color={"#fff"}
-              loading={isFetching}
-              size={20}
-              aria-label="Loading Spinner"
-            />
-          ) : (
-            "Generate palette"
-          )}
+          <span class="front text-center">
+            {isFetching ? (
+              <ClipLoader
+                color={"#fff"}
+                loading={isFetching}
+                size={20}
+                aria-label="Loading Spinner"
+              />
+            ) : (
+              "Generate palette"
+            )}
+          </span>
         </button>
       </form>
 
