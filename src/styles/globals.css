@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body,
+html {
+  min-height: 100%;
+}
+
 body {
   position: relative;
   /* background-image: radial-gradient(
@@ -83,4 +88,7 @@ form .input:focus,
 }
 .pushable:focus:not(:focus-visible) {
   outline: none;
+}
+footer {
+  height: calc(18vh - 80px);
 }

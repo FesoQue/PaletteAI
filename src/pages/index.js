@@ -20,7 +20,7 @@ const Index = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // refetch();
+    refetch();
   };
 
   function convertHexToRgba(hex) {
@@ -52,7 +52,6 @@ const Index = () => {
         return true;
       }
     }
-
     return false;
   }
 
@@ -62,11 +61,9 @@ const Index = () => {
     return s.color == strColor;
   }
 
-  const disable =
-    !colorCode ||
-    (colorCode && !validateColorCode(colorCode)) ||
-    isColor(colorCode) ||
-    isFetching;
+  const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
+
+  const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
 
   function clickToCopy(text) {
     let textArea = document.createElement("textarea");
@@ -78,96 +75,121 @@ const Index = () => {
   }
 
   return (
-    <main className="max-w-[1100px] mx-auto py-20">
-      <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold mb-1">
-          Palette<span className="text-[#10A37F]">AI</span>.
-        </h1>
-        <p className="text-[18px]">Create a color palette using AI.</p>
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-xl mx-auto mb-20 px-10"
-        autoComplete="off"
-      >
-        <div className="input border-gray-500 w-full mb-6 h-[51px] rounded-[12px] border-1 border bg-whiter flex items-center hover:transition-all ease-in-out">
-          <span className="h-full flex items-center px-3 text-gray-500">
-            <Search />
-          </span>
-          <input
-            type="text"
-            required
-            name="color_code"
-            placeholder="#FFFAEF"
-            className="outline-none border-none h-full w-full bg-transparent"
-            value={colorCode}
-            onChange={(e) => setColorCode(e.target.value)}
-          />
-        </div>
-        <button
-          class={`pushable w-full ${disable && "opacity-50"}`}
-          style={{ cursor: disable && "not-allowed" }}
-          disabled={disable}
-        >
-          <span class="front text-center">
-            {isFetching ? (
-              <ClipLoader
-                color={"#fff"}
-                loading={isFetching}
-                size={20}
-                aria-label="Loading Spinner"
-              />
-            ) : (
-              "Generate palette"
-            )}
-          </span>
-        </button>
-      </form>
-
-      <div>
-        {isFetching ? (
-          <h1 className="text-2xl font-semibold text-center mt-4">
-            Loading...
+    <main className=" pt-20">
+      <div className="min-h-[82vh] max-w-[1100px] mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold mb-2">
+            Palette<span className="text-[#10A37F]">AI</span>
+            <span className="text-4xl">🎨</span>
           </h1>
-        ) : (
-          <div className="bg-red-300">
-            <ErrorHandler>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {data?.map((color, i) => {
-                  const convertToArr = color.split(":");
-                  const paletteName = convertToArr[0];
-                  const paletteColor = convertToArr[1].split(" ")[1];
-                  return (
-                    <div
-                      key={i}
-                      className={`w-full min-h-[220px] py-8 pl-8 `}
-                      style={{ background: `${paletteColor}` }}
-                    >
-                      <div className="flex flex-col justify-end h-full">
-                        {/* <div
+          <p className="text-[18px]">
+            Create beautiful color palette using AI.
+          </p>
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-xl mx-auto mb-20 px-10"
+          autoComplete="off"
+        >
+          <div className="input border-gray-500 w-full mb-6 h-[51px] rounded-[12px] border-1 border bg-whiter flex items-center hover:transition-all ease-in-out">
+            <span className="h-full flex items-center px-3 text-gray-500">
+              <Search />
+            </span>
+            <input
+              type="text"
+              required
+              name="color_code"
+              placeholder="Enter a valid color 😉"
+              className="outline-none border-none h-full w-full bg-transparent"
+              value={colorCode}
+              onChange={(e) => setColorCode(e.target.value)}
+            />
+          </div>
+          <button
+            className={`pushable w-full ${disable && "opacity-50"}`}
+            style={{ cursor: disable && "not-allowed" }}
+            disabled={disable}
+          >
+            <span className="front text-center">
+              {isFetching ? (
+                <ClipLoader
+                  color={"#fff"}
+                  loading={isFetching}
+                  size={20}
+                  aria-label="Loading Spinner"
+                />
+              ) : (
+                "Generate palette"
+              )}
+            </span>
+          </button>
+        </form>
+        <section className="pb-20">
+          {isFetching ? (
+            // <h1 className="text-2xl font-semibold text-center mt-4">
+            //   Loading...
+            // </h1>
+            <div className="flex justify-center">
+              <img src="/cube-loader.svg" alt="loader" />
+            </div>
+          ) : (
+            <div className="bg-red-300">
+              <ErrorHandler>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  {data?.map((color, i) => {
+                    const convertToArr = color.split(":");
+                    const paletteName = convertToArr[0];
+                    const paletteColor = convertToArr[1].split(" ")[1];
+                    return (
+                      <div
+                        key={i}
+                        className={`w-full min-h-[220px] py-8 pl-8 `}
+                        style={{ background: `${paletteColor}` }}
+                      >
+                        <div className="flex flex-col justify-end h-full">
+                          {/* <div
                           className="w-[100px] h-[100px] mb-2"
                           style={{
                             background: `rgba(255, 255, 255, .2)`,
                           }}
                         ></div> */}
-                        <p className="font-semibold text-sm uppercase mb-2 underline underline-offset-4">
-                          {paletteName}
-                        </p>
-                        <p className="font-semibold text-sm uppercase mb-1">
-                          {paletteColor}
-                        </p>
-                        <p className="font-semibold text-sm uppercase">
-                          {convertHexToRgba(paletteColor)}
-                        </p>
+                          <p className="font-semibold text-sm uppercase mb-2 underline underline-offset-4">
+                            {paletteName}
+                          </p>
+                          <p className="font-semibold text-sm uppercase mb-1">
+                            {paletteColor}
+                          </p>
+                          <p className="font-semibold text-sm uppercase">
+                            {convertHexToRgba(paletteColor)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </ErrorHandler>
-          </div>
-        )}
+                    );
+                  })}
+                </div>
+              </ErrorHandler>
+            </div>
+          )}
+        </section>
       </div>
+
+      {/* footer */}
+      <footer className="bg-[#F1F5F9]">
+        <div className="max-w-[1100px] mx-auto h-full flex items-center justify-between px-4">
+          <p>
+            © {new Date().getFullYear()}{" "}
+            <a href="#" className="text-[#334155] font-semibold">
+              Qudus A.
+            </a>
+          </p>
+          <p>
+            Made with ❤️ &&{" "}
+            <a href="#" className="text-[#334155] font-semibold">
+              openai
+            </a>
+          </p>
+        </div>
+      </footer>
       <Toaster />
     </main>
   );
