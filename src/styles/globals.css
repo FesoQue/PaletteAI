@@ -51,7 +51,7 @@ form .input {
 }
 form .input:hover,
 form .input:focus,
-.input:active {
+form .input:focus-within {
   transition: all 600ms ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 255, 204, 0.06) 0px 10px;
 }
@@ -91,4 +91,11 @@ form .input:focus,
 }
 footer {
   height: calc(18vh - 80px);
+}
+.color-card-text {
+  transform: translateY(200px);
+  transition: transform 600ms;
+}
+.color-card:hover .color-card-text {
+  transform: translate(0);
 }

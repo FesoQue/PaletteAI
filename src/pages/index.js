@@ -4,7 +4,7 @@ import { ClipLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 import ErrorHandler from "@/helper/ErrorHandler";
 import { defaultData } from "@/data/defaultdata";
-import { Search } from "@/components/Search";
+import { Search, View } from "@/icons/icons";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
@@ -143,25 +143,30 @@ const Index = () => {
                     return (
                       <div
                         key={i}
-                        className={`w-full min-h-[220px] py-8 pl-8 `}
-                        style={{ background: `${paletteColor}` }}
+                        className={`color-card w-full min-h-[220px] pb-7 text-center md:pb-8`}
+                        style={{
+                          background: `${paletteColor}`,
+                          overflow: "hidden",
+                        }}
                       >
                         <div className="flex flex-col justify-end h-full">
-                          {/* <div
-                          className="w-[100px] h-[100px] mb-2"
-                          style={{
-                            background: `rgba(255, 255, 255, .2)`,
-                          }}
-                        ></div> */}
-                          <p className="font-semibold text-sm uppercase mb-2 underline underline-offset-4">
-                            {paletteName}
-                          </p>
-                          <p className="font-semibold text-sm uppercase mb-1">
+                          <div className="color-card-text">
+                            <p className="font-semibold text-sm uppercase mb-2">
+                              {paletteName}
+                            </p>
+                            <button className="flex mx-auto item-center justify-center text-xs uppercase bg-white opacity-60 p-2 font-semibold rounded">
+                              <span className="mr-1">
+                                <View />
+                              </span>{" "}
+                              view color code
+                            </button>
+                          </div>
+                          {/* <p className="font-semibold text-sm uppercase mb-1">
                             {paletteColor}
                           </p>
                           <p className="font-semibold text-sm uppercase">
                             {convertHexToRgba(paletteColor)}
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                     );
