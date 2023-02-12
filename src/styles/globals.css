@@ -92,6 +92,13 @@ form button {
 .pushable:focus:not(:focus-visible) {
   outline: none;
 }
+.disable-cursor {
+  cursor: not-allowed;
+}
+.copy-btn {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 0, 0, 0.06) 0px 7px;
+}
+
 footer {
   height: calc(18vh - 80px);
 }
@@ -102,6 +109,9 @@ footer {
 .color-card:hover .color-card-text {
   transform: translate(0);
 }
-.copy-btn {
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 0, 0, 0.06) 0px 7px;
+.color-card {
+  transition: all 600ms ease-in-out;
+}
+.color-card:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }

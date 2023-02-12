@@ -91,8 +91,9 @@ const Index = () => {
             />
           </div>
           <button
-            className={`pushable w-full ${disable && "opacity-50"}`}
-            style={{ cursor: disable && "not-allowed" }}
+            className={`pushable w-full ${
+              disable && "disable-cursor opacity-50"
+            }`}
             disabled={disable}
           >
             <span className="front text-center">
