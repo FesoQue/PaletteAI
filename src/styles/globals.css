@@ -31,10 +31,10 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: linear-gradient(
-      rgba(0, 0, 0, 0.008) 0.1em,
+      rgba(0, 0, 0, 0.006) 0.1em,
       transparent 0.1em
     ),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.008) 0.1em, transparent 0.1em);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.006) 0.1em, transparent 0.1em);
   background-size: 2em 2em;
   z-index: -1;
 }
@@ -53,7 +53,10 @@ form .input:hover,
 form .input:focus,
 form .input:focus-within {
   transition: all 600ms ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 255, 204, 0.06) 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 0, 0, 0.06) 0px 7px;
+}
+form button {
+  transition: opacity 600ms ease-in-out;
 }
 .pushable {
   background: #0a7f5f;
@@ -98,4 +101,7 @@ footer {
 }
 .color-card:hover .color-card-text {
   transform: translate(0);
+}
+.copy-btn {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 0, 0, 0.06) 0px 7px;
 }

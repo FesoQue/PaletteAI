@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import { useColorData } from "@/hooks/useColorData";
 import { ClipLoader } from "react-spinners";
-import toast, { Toaster } from "react-hot-toast";
 import ErrorHandler from "@/helper/ErrorHandler";
 import { defaultData } from "@/data/defaultdata";
 import { Search, View } from "@/icons/icons";
+// import ColorDialog from "@/components/Modal";
+import MyDialog from "@/components/Modal";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
 
-  const onError = (error) => {
-    return toast.error(error.message);
-  };
-
-  const { data, isError, error, refetch, isFetching } = useColorData(
-    colorCode,
-    onError
-  );
+  const { data, refetch, isFetching } = useColorData(colorCode);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,15 +58,6 @@ const Index = () => {
   const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
 
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
-
-  function clickToCopy(text) {
-    let textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-  }
 
   return (
     <main className=" pt-20">
@@ -154,19 +139,11 @@ const Index = () => {
                             <p className="font-semibold text-sm uppercase mb-2">
                               {paletteName}
                             </p>
-                            <button className="flex mx-auto item-center justify-center text-xs uppercase bg-white opacity-60 p-2 font-semibold rounded">
-                              <span className="mr-1">
-                                <View />
-                              </span>{" "}
-                              view color code
-                            </button>
+                            <MyDialog
+                              color={paletteColor}
+                              rgb={convertHexToRgba(paletteColor)}
+                            />
                           </div>
-                          {/* <p className="font-semibold text-sm uppercase mb-1">
-                            {paletteColor}
-                          </p>
-                          <p className="font-semibold text-sm uppercase">
-                            {convertHexToRgba(paletteColor)}
-                          </p> */}
                         </div>
                       </div>
                     );
@@ -195,7 +172,6 @@ const Index = () => {
           </p>
         </div>
       </footer>
-      <Toaster />
     </main>
   );
 };
