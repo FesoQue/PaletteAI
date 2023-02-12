@@ -115,3 +115,10 @@ footer {
 .color-card:hover {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+.modal-color-bg button {
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}
+.modal-color-bg:hover > button {
+  opacity: 0.6;
+}

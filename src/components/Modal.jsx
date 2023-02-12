@@ -15,9 +15,9 @@ export default function MyDialog({ color, rgb }) {
   const clickToCopy = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success(`${text} copied`);
+      toast.success(`copied ${text}`);
     } catch (err) {
-      toast.error("Failed to copy: ");
+      toast.error("Failed to copy ");
     }
   };
 
@@ -66,13 +66,18 @@ export default function MyDialog({ color, rgb }) {
                     <div
                       className="rounded overflow-hidden"
                       style={{
-                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                        boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 4px",
                       }}
                     >
                       <div
-                        className="w-full h-[120px]"
+                        className="modal-color-bg w-full h-[120px] grid place-items-center cursor-pointer"
                         style={{ background: `${color}` }}
-                      ></div>
+                        onClick={() => clickToCopy(color)}
+                      >
+                        <button className="text-xs uppercase bg-white p-2 font-semibold rounded">
+                          click to copy hex
+                        </button>
+                      </div>
                       <div className="py-4">
                         <div className="flex items-center justify-between px-3 pb-4 mb-4 border-b border-b-1 border-b-gray-300">
                           <div className="">
