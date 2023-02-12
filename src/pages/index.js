@@ -157,7 +157,7 @@ const Index = () => {
       </div>
 
       {/* footer */}
-      <footer className="bg-[#F1F5F9]">
+      <footer className="">
         <div className="max-w-[1100px] mx-auto h-full flex items-center justify-between px-4">
           <p>
             © {new Date().getFullYear()}{" "}
