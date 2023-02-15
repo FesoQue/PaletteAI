@@ -4,8 +4,10 @@ import { ClipLoader } from "react-spinners";
 import ErrorHandler from "@/helper/ErrorHandler";
 import { defaultData } from "@/data/defaultdata";
 import { Search, View } from "@/icons/icons";
-// import ColorDialog from "@/components/Modal";
 import MyDialog from "@/components/Modal";
+import Head from "next/head";
+import { Star, Love } from "@/icons/icons";
+import Link from "next/link";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
@@ -60,8 +62,20 @@ const Index = () => {
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
 
   return (
-    <main className=" pt-20">
-      <div className="min-h-[82vh] max-w-[1100px] mx-auto">
+    <main className="max-w-[1100px] mx-auto">
+      <Head>
+        <title>PaletteAI</title>
+      </Head>
+      {/* <div className="mb-8 pt-9 px-8 ">
+        <Link href={"/"} className="flex justify-end items-center text-lg">
+          Star{" "}
+          <span className="text-[#FFB900] mx-1">
+            <Star />
+          </span>
+          on Github
+        </Link>
+      </div> */}
+      <div className="min-h-[95vh] pt-[83px] ">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-2">
             Palette<span className="text-[#10A37F]">AI</span>
@@ -112,14 +126,11 @@ const Index = () => {
         </form>
         <section className="pb-20">
           {isFetching ? (
-            // <h1 className="text-2xl font-semibold text-center mt-4">
-            //   Loading...
-            // </h1>
             <div className="flex justify-center">
               <img src="/cube-loader.svg" alt="loader" />
             </div>
           ) : (
-            <div className="bg-red-300">
+            <div className="">
               <ErrorHandler>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {data?.map((color, i) => {
@@ -165,10 +176,19 @@ const Index = () => {
               Qudus A.
             </a>
           </p>
-          <p>
-            Made with ❤️ &&{" "}
-            <a href="#" className="text-[#334155] font-semibold">
-              openai
+          <p className="flex items-center">
+            Made with{" "}
+            <span className="svg mx-1">
+              <Love />
+            </span>{" "}
+            &&{" "}
+            <a
+              href="https://openai.com/"
+              target={"_blank"}
+              rel="noopener noreferrer"
+              className="text-[#334155] font-semibold capitalize ml-1"
+            >
+              openAI
             </a>
           </p>
         </div>

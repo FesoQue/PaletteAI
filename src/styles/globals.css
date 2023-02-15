@@ -98,10 +98,6 @@ form button {
 .copy-btn {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px, rgba(0, 0, 0, 0.06) 0px 7px;
 }
-
-footer {
-  height: calc(18vh - 80px);
-}
 .color-card-text {
   transform: translateY(200px);
   transition: transform 600ms;
@@ -121,4 +117,9 @@ footer {
 }
 .modal-color-bg:hover > button {
   opacity: 0.6;
+}
+.svg svg {
+  stroke-width: 2;
+  stroke: #000;
+  color: #ffb900;
 }
