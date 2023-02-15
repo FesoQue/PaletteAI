@@ -15,7 +15,7 @@ body {
       transparent 40%
     ),
     radial-gradient(at 90% -80%, rgba(252, 165, 165, 0.2) 0px, transparent 50%); */
-  /* background-image: url("../../public/beams_gradient.jpg"); */
+  background-image: url("../../public/gradient1.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,7 +34,7 @@ body::before {
       rgba(0, 0, 0, 0.006) 0.1em,
       transparent 0.1em
     ),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.008) 0.1em, transparent 0.1em);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0.1em, transparent 0.1em);
   background-size: 2em 2em;
   z-index: -1;
 }
