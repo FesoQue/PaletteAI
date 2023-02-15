@@ -6,7 +6,7 @@ import { defaultData } from "@/data/defaultdata";
 import { Search, View } from "@/icons/icons";
 import MyDialog from "@/components/Modal";
 import Head from "next/head";
-import { Star, Love } from "@/icons/icons";
+import { Love } from "@/icons/icons";
 import Link from "next/link";
 
 const Index = () => {
@@ -27,17 +27,18 @@ const Index = () => {
   }
 
   function validateColorCode(colorCode) {
-    if (colorCode.startsWith("#")) {
+    const color_code = colorCode.toLowerCase();
+    if (color_code.startsWith("#")) {
       // validate hex code. support 3 and 6 hex code
       if (
-        /^#[0-9A-F]{6}$/i.test(colorCode) ||
-        /^#[0-9A-F]{3}$/i.test(colorCode)
+        /^#[0-9A-F]{6}$/i.test(color_code) ||
+        /^#[0-9A-F]{3}$/i.test(color_code)
       ) {
         return true;
       }
-    } else if (colorCode.startsWith("rgb")) {
+    } else if (color_code.startsWith("rgb")) {
       // validate rgb code
-      let splitCode = colorCode.split(",");
+      let splitCode = color_code.split(",");
       if (splitCode.length === 3) {
         for (let i = 0; i < 3; i++) {
           let value = parseInt(splitCode[i].trim());
@@ -53,8 +54,8 @@ const Index = () => {
 
   function isColor(strColor) {
     var s = new Option().style;
-    s.color = strColor;
-    return s.color == strColor;
+    s.color = strColor.toLowerCase();
+    return s.color == strColor.toLowerCase();
   }
 
   const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
