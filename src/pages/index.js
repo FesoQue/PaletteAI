@@ -61,6 +61,7 @@ const Index = () => {
   const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
 
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
+  console.log(data);
 
   return (
     <main className="max-w-[1100px] mx-auto">
@@ -135,7 +136,7 @@ const Index = () => {
               <ErrorHandler>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {data?.map((color, i) => {
-                    const convertToArr = color.split(":");
+                    const convertToArr = color?.split(":");
                     const designName = convertToArr[0];
                     const paletteColor = convertToArr[1].split(" ")[1];
                     const paletteName = convertToArr[1]
