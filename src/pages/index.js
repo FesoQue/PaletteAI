@@ -76,7 +76,7 @@ const Index = () => {
           on Github
         </Link>
       </div> */}
-      <div className="min-h-[95vh] pt-[83px] ">
+      <div className="min-h-[95vh] pt-[70px] ">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-2">
             Palette<span className="text-[#10A37F]">AI</span>
