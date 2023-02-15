@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     res.status(500).json({
       error: {
         message:
-          "OpenAI API key not configured, please follow instructions in README.md",
+          "OpenAI API key not configured",
       },
     });
     return;

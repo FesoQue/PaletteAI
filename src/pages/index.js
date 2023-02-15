@@ -8,11 +8,13 @@ import MyDialog from "@/components/Modal";
 import Head from "next/head";
 import { Love } from "@/icons/icons";
 import Link from "next/link";
+import Error from "@/components/Error";
+import Image from "next/image";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
 
-  const { data, refetch, isFetching } = useColorData(colorCode);
+  const { data, refetch, isFetching, isError, error } = useColorData(colorCode);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +63,6 @@ const Index = () => {
   const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
 
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
-  console.log(data);
 
   return (
     <main className="max-w-[1100px] mx-auto">
@@ -129,48 +130,55 @@ const Index = () => {
         <section className="pb-20">
           {isFetching ? (
             <div className="flex justify-center">
-              <img src="/cube-loader.svg" alt="loader" />
+              <Image
+                src="/cube-loader.svg"
+                width={80}
+                height={80}
+                alt="loader"
+              />
             </div>
+          ) : isError ? (
+            <>
+              <Error error={error} refetch={refetch} />
+            </>
           ) : (
-            <div className="">
-              <ErrorHandler>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                  {data?.map((color, i) => {
-                    const convertToArr = color?.split(":");
-                    const designName = convertToArr[0];
-                    const paletteColor = convertToArr[1].split(" ")[1];
-                    const paletteName = convertToArr[1]
-                      .split(" ")[2]
-                      .split("(")[1]
-                      .split(")")[0];
+            <ErrorHandler>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {data?.map((color, i) => {
+                  const convertToArr = color?.split(":");
+                  const designName = convertToArr[0];
+                  const paletteColor = convertToArr[1].split(" ")[1];
+                  const paletteName = convertToArr[1]
+                    .split(" ")[2]
+                    .split("(")[1]
+                    .split(")")[0];
 
-                    return (
-                      <div
-                        key={i}
-                        className={`color-card w-full min-h-[220px] pb-7 text-center md:pb-8`}
-                        style={{
-                          background: `${paletteColor}`,
-                          overflow: "hidden",
-                        }}
-                      >
-                        <div className="flex flex-col justify-end h-full">
-                          <div className="color-card-text">
-                            <p className="font-semibold text-sm uppercase mb-2">
-                              {designName}
-                            </p>
-                            <MyDialog
-                              color={paletteColor}
-                              rgb={convertHexToRgba(paletteColor)}
-                              name={paletteName}
-                            />
-                          </div>
+                  return (
+                    <div
+                      key={i}
+                      className={`color-card w-full min-h-[220px] pb-7 text-center md:pb-8`}
+                      style={{
+                        background: `${paletteColor}`,
+                        overflow: "hidden",
+                      }}
+                    >
+                      <div className="flex flex-col justify-end h-full">
+                        <div className="color-card-text">
+                          <p className="font-semibold text-sm uppercase mb-2">
+                            {designName}
+                          </p>
+                          <MyDialog
+                            color={paletteColor}
+                            rgb={convertHexToRgba(paletteColor)}
+                            name={paletteName}
+                          />
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              </ErrorHandler>
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </ErrorHandler>
           )}
         </section>
       </div>
