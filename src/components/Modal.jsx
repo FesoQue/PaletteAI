@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function MyDialog({ color, rgb }) {
+export default function MyDialog({ color, rgb, name }) {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -60,8 +60,8 @@ export default function MyDialog({ color, rgb }) {
               >
                 <Dialog.Panel className="w-full relative max-w-xl transform  rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div>
-                    <h2 className="text-capitalize font-semibold text-xl mb-4">
-                      Color name:
+                    <h2 className="text-capitalize font-semibold text-lg mb-4">
+                      Color Name: {name}
                     </h2>
                     <div
                       className="rounded overflow-hidden"

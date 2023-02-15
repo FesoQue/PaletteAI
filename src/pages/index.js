@@ -135,8 +135,13 @@ const Index = () => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {data?.map((color, i) => {
                     const convertToArr = color.split(":");
-                    const paletteName = convertToArr[0];
+                    const designName = convertToArr[0];
                     const paletteColor = convertToArr[1].split(" ")[1];
+                    const paletteName = convertToArr[1]
+                      .split(" ")[2]
+                      .split("(")[1]
+                      .split(")")[0];
+
                     return (
                       <div
                         key={i}
@@ -149,11 +154,12 @@ const Index = () => {
                         <div className="flex flex-col justify-end h-full">
                           <div className="color-card-text">
                             <p className="font-semibold text-sm uppercase mb-2">
-                              {paletteName}
+                              {designName}
                             </p>
                             <MyDialog
                               color={paletteColor}
                               rgb={convertHexToRgba(paletteColor)}
+                              name={paletteName}
                             />
                           </div>
                         </div>
@@ -172,7 +178,12 @@ const Index = () => {
         <div className="max-w-[1100px] mx-auto h-full flex items-center justify-between px-4">
           <p>
             © {new Date().getFullYear()}{" "}
-            <a href="#" className="text-[#334155] font-semibold">
+            <a
+              href="https://github.com/FesoQue"
+              target={"_blank"}
+              rel="noopener noreferrer"
+              className="text-[#334155] font-semibold"
+            >
               Qudus A.
             </a>
           </p>
