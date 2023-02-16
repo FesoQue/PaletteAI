@@ -9,12 +9,6 @@ html {
 
 body {
   position: relative;
-  /* background-image: radial-gradient(
-      at 100% 40%,
-      rgba(129, 100, 244, 0.2) 0px,
-      transparent 40%
-    ),
-    radial-gradient(at 90% -80%, rgba(252, 165, 165, 0.2) 0px, transparent 50%); */
   background-image: url("../../public/gradient1.png");
   background-position: center;
   background-repeat: no-repeat;

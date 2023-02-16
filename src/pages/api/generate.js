@@ -8,8 +8,7 @@ export default async function handler(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message:
-          "OpenAI API key not configured",
+        message: "OpenAI API key not configured",
       },
     });
     return;
@@ -34,7 +33,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ result: response.data.choices[0].text });
   } catch (error) {
     if (error.response) {
-      console.error(error.response.status, error.response.data);
       return res.status(error.response.status).json(error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);

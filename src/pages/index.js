@@ -29,7 +29,7 @@ const Index = () => {
   }
 
   function validateColorCode(colorCode) {
-    const color_code = colorCode.toLowerCase();
+    const color_code = colorCode.trim().toLowerCase();
     if (color_code.startsWith("#")) {
       // validate hex code. support 3 and 6 hex code
       if (
@@ -55,14 +55,17 @@ const Index = () => {
   }
 
   function isColor(strColor) {
+    const color = strColor.trim().toLowerCase();
     var s = new Option().style;
-    s.color = strColor.toLowerCase();
-    return s.color == strColor.toLowerCase();
+    s.color = color;
+    return s.color == color;
   }
 
   const isValidatedColor = validateColorCode(colorCode) || isColor(colorCode);
 
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
+
+  console.log(isError);
 
   return (
     <main className="max-w-[1100px] mx-auto">
