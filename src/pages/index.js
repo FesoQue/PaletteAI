@@ -10,16 +10,12 @@ import { Love } from "@/icons/icons";
 import Link from "next/link";
 import Error from "@/components/Error";
 import Image from "next/image";
+import { fetchColorData } from "@/hooks/useColorData";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
 
   const { data, refetch, isFetching, isError, error } = useColorData(colorCode);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    refetch();
-  };
 
   function convertHexToRgba(hex) {
     const r = parseInt(hex.substring(1, 3), 16);
@@ -65,7 +61,11 @@ const Index = () => {
 
   const disable = !colorCode || isFetching || (colorCode && !isValidatedColor);
 
-  console.log(isError);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    refetch();
+    // await fetchColorData(colorCode);
+  };
 
   return (
     <main className="max-w-[1100px] mx-auto">
@@ -146,7 +146,7 @@ const Index = () => {
             </>
           ) : (
             <ErrorHandler>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {data?.map((color, i) => {
                   const convertToArr = color?.split(":");
                   const designName = convertToArr[0];

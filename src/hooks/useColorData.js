@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const fetchColorData = async (colorCode) => {
   try {
-    const response = await fetch("/api/generate", {
+    const response = await fetch("/api/generatecolor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -10,12 +10,10 @@ const fetchColorData = async (colorCode) => {
       body: JSON.stringify({ color: colorCode }),
     });
 
-    const data = await response.json();
     if (!response.ok) {
-      throw (
-        data.error || new Error(`Request failed with status ${response.status}`)
-      );
+      throw new Error(`Request failed with status ${response.status}`);
     }
+    const data = await response.json();
     return data.result.split("\n");
   } catch (error) {
     return error.message;

@@ -1,68 +1,65 @@
 import { Configuration, OpenAIApi } from "openai";
 import { NextResponse } from "next/server";
 
+export const config = {
+  runtime: "edge",
+};
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
-
-// export const config = {
-//   runtime: "edge",
-// };
 
 export default async function handler(req, res) {
   if (!configuration.apiKey) {
-    res.status(500).json({
+    NextResponse.json({
       error: {
         message: "OpenAI API key not configured",
       },
     });
     return;
   }
-  // const color = req.body.color || "";
-  const color = req.body.color;
-  // if (color.trim().length === 0) {
-  //   // return res.status(400).json({
-  //   //   message: "Enter a valid color",
-  //   // });
-  //   return NextResponse.json({
-  //     message: "Enter a valid color",
-  //   });
-  // }
+  const { color } = await req.json();
+  if (color.trim().length === 0) {
+    return NextResponse.json({
+      message: "Enter a valid color",
+    });
+  }
 
   try {
-    const response = await openai.createCompletion({
+    const payload = {
       model: "text-davinci-003",
-      prompt: generatePrompt(color),
+      prompt: await generatePrompt(color),
       temperature: 0,
       max_tokens: 1000,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0.6,
-    });
-    return res.status(200).json({ result: response.data.choices[0].text });
-    // return NextResponse.json({ result: response.data.choices[0].text });
+    };
+    return fetch("https://api.openai.com/v1/completions", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
+      },
+      method: "POST",
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => NextResponse.json({ result: data.choices[0].text }));
   } catch (error) {
     if (error.response) {
-      return res.status(error.response.status).json(error.response.data);
-      // return NextResponse.json(error.response.data);
+      return NextResponse.status(error.response.status).json(
+        error.response.data
+      );
     } else {
-      // console.error(`Error with OpenAI API request: ${error.message}`);
-      return res.status(500).json({
+      return NextResponse.json({
         error: {
           message: "An error occurred during your request.",
         },
       });
-      // return NextResponse.json({
-      //   error: {
-      //     message: "An error occurred during your request.",
-      //   },
-      // });
     }
   }
 }
 
-function generatePrompt(color) {
+async function generatePrompt(color) {
   return `suggest a color system based on any color below with name and hex code. it must include primary color, primary variant, secondary color , secondary variant, Neutral,  background , tint color, shade color, success color, warning color and an error color.
 
 Color: green
