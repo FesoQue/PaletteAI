@@ -11,6 +11,10 @@ export default function Document() {
           href="/favicon/favicon-32x32.png"
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <body>
         <Main />

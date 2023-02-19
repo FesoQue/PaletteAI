@@ -32,12 +32,16 @@ body::before {
   background-size: 2em 2em;
   z-index: -1;
 }
+p {
+  font-family: "Unbounded", cursive;
+}
 button,
 textarea,
 input,
 select,
 a {
   -webkit-tap-highlight-color: transparent;
+  font-family: "Unbounded", cursive;
 }
 
 form .input {
@@ -65,7 +69,7 @@ form button {
   display: block;
   padding: 12px 42px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 16px;
   background: #10a37f;
   color: white;
   transform: translateY(-6px);
@@ -116,4 +120,8 @@ form button {
   stroke-width: 2;
   stroke: #000;
   color: #ffb900;
+}
+.zzz {
+  box-shadow: rgba(50, 50, 93, 0.18) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.18) 0px 1px 3px -1px;
 }

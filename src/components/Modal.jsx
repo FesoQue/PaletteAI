@@ -24,13 +24,13 @@ export default function MyDialog({ color, rgb, name }) {
   return (
     <div>
       <button
-        className="flex mx-auto item-center justify-center text-xs uppercase bg-white opacity-60 p-2 font-semibold rounded"
+        className="flex item-center justify-center text-[12px] text-gray-700 uppercase bg-white py-2 px-3 "
         onClick={openModal}
       >
-        <span className="mr-1">
+        <span className="mr-2">
           <View />
         </span>{" "}
-        view color code
+        View <span className="hidden md:inline mx-1">color</span> code
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -60,9 +60,9 @@ export default function MyDialog({ color, rgb, name }) {
               >
                 <Dialog.Panel className="w-full relative max-w-xl transform  rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div>
-                    <h2 className="text-capitalize font-semibold text-lg mb-4">
+                    <p className="text-capitalize font-semibold text-base mb-4">
                       Color Name: {name}
-                    </h2>
+                    </p>
                     <div
                       className="rounded overflow-hidden"
                       style={{
@@ -79,13 +79,15 @@ export default function MyDialog({ color, rgb, name }) {
                         </button>
                       </div>
                       <div className="py-4">
-                        <div className="flex items-center justify-between px-3 pb-4 mb-4 border-b border-b-1 border-b-gray-300">
+                        <div className="flex items-center justify-between px-3 pb-4 mb-4 border-b border-b-1 border-b-gray-200">
                           <div className="">
-                            <p className="capitalize text-sm mb-1">hex:</p>
-                            <p className="font-semibold text-sm">{color}</p>
+                            <p className="uppercase text-sm mb-1">hex:</p>
+                            <p className="font-semibold text-[13px] text-gray-700">
+                              {color}
+                            </p>
                           </div>
                           <button
-                            className="copy-btn uppercase text-sm font-bold text-gray-400 px-3 py-1 border border01 border-gray-400 rounded hover:text-gray-600"
+                            className="copy-btn uppercase text-sm font-bold text-gray-500 px-3 py-1 border border01 border-gray-400 rounded hover:text-gray-600"
                             onClick={() => clickToCopy(color)}
                           >
                             Copy
@@ -93,11 +95,13 @@ export default function MyDialog({ color, rgb, name }) {
                         </div>
                         <div className="flex items-center justify-between px-3">
                           <div className="">
-                            <p className="capitalize text-sm mb-1">Rgb:</p>
-                            <p className="font-semibold text-sm">{rgb}</p>
+                            <p className="uppercase text-sm mb-1">Rgb:</p>
+                            <p className="font-semibold text-[13px] text-gray-700">
+                              {rgb}
+                            </p>
                           </div>
                           <button
-                            className="copy-btn uppercase text-sm font-bold text-gray-400 px-3 py-1 border border01 border-gray-400 rounded hover:text-gray-600"
+                            className="copy-btn uppercase text-sm font-bold text-gray-500 px-3 py-1 border border01 border-gray-400 rounded hover:text-gray-600"
                             onClick={() => clickToCopy(rgb)}
                           >
                             Copy
@@ -110,7 +114,7 @@ export default function MyDialog({ color, rgb, name }) {
                     className="absolute top-3 right-3"
                     onClick={closeModal}
                   >
-                    <span className="text-gray-500">
+                    <span className="text-gray-700">
                       <Close />
                     </span>
                   </button>

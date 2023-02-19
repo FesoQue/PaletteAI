@@ -10,7 +10,7 @@ import { Love } from "@/icons/icons";
 import Link from "next/link";
 import Error from "@/components/Error";
 import Image from "next/image";
-import { fetchColorData } from "@/hooks/useColorData";
+// import { fetchColorData } from "@/hooks/useColorData";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFFAEF");
@@ -82,12 +82,12 @@ const Index = () => {
         </Link>
       </div> */}
       <div className="min-h-[95vh] pt-[70px] ">
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 px-10">
           <h1 className="text-5xl font-bold mb-2">
             Palette<span className="text-[#10A37F]">AI</span>
             <span className="text-4xl">🎨</span>
           </h1>
-          <p className="text-[18px]">
+          <p className="text-base md:text-lg text-gray-700">
             Create beautiful color palette using AI.
           </p>
         </div>
@@ -105,7 +105,7 @@ const Index = () => {
               required
               name="color_code"
               placeholder="Enter a valid color 😉"
-              className="outline-none border-none h-full w-full bg-transparent"
+              className="outline-none border-none h-full w-full bg-transparent placeholder:text-sm text-gray-700"
               value={colorCode}
               onChange={(e) => setColorCode(e.target.value)}
             />
@@ -146,7 +146,7 @@ const Index = () => {
             </>
           ) : (
             <ErrorHandler>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 overflow-hidden">
                 {data?.map((color, i) => {
                   const convertToArr = color?.split(":");
                   const designName = convertToArr[0];
@@ -157,25 +157,36 @@ const Index = () => {
                     .split(")")[0];
 
                   return (
-                    <div
-                      key={i}
-                      className={`color-card w-full min-h-[220px] pb-7 text-center md:pb-8`}
-                      style={{
-                        background: `${paletteColor}`,
-                        overflow: "hidden",
-                      }}
-                    >
-                      <div className="flex flex-col justify-end h-full">
-                        <div className="color-card-text">
-                          <p className="font-semibold text-sm uppercase mb-2">
-                            {designName}
-                          </p>
-                          <MyDialog
-                            color={paletteColor}
-                            rgb={convertHexToRgba(paletteColor)}
-                            name={paletteName}
-                          />
-                        </div>
+                    <div key={i} className="zzz p-4 bg-gray-50">
+                      <div
+                        className={`w-full min-h-[220px] pb-7 text-center md:pb-8 `}
+                        style={{
+                          background: `${paletteColor}`,
+                          overflow: "hidden",
+                        }}
+                      >
+                        {/* <div className="flex flex-col justify-end h-full">
+                          <div className="color-card-text">
+                            <p className="font-semibold text-sm uppercase mb-2">
+                              {designName}
+                            </p>
+                            <MyDialog
+                              color={paletteColor}
+                              rgb={convertHexToRgba(paletteColor)}
+                              name={paletteName}
+                            />
+                          </div>
+                        </div> */}
+                      </div>
+                      <div className="mt-3">
+                        <p className="uppercase text-[12px] font-semibold mb-2 text-gray-700">
+                          {designName}
+                        </p>
+                        <MyDialog
+                          color={paletteColor}
+                          rgb={convertHexToRgba(paletteColor)}
+                          name={paletteName}
+                        />
                       </div>
                     </div>
                   );
@@ -188,8 +199,8 @@ const Index = () => {
 
       {/* footer */}
       <footer className="">
-        <div className="max-w-[1100px] mx-auto h-full flex items-center justify-between px-4">
-          <p>
+        <div className="max-w-[1100px] mx-auto h-full flex items-center justify-between px-4 py-3">
+          <p className="text-[12px] md:text-[15px]">
             © {new Date().getFullYear()}{" "}
             <a
               href="https://github.com/FesoQue"
@@ -200,7 +211,7 @@ const Index = () => {
               Qudus A.
             </a>
           </p>
-          <p className="flex items-center">
+          <p className="flex items-center text-[12px] md:text-[15px]">
             Made with{" "}
             <span className="svg mx-1">
               <Love />
