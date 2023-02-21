@@ -203,7 +203,7 @@ const Index = () => {
           <p className="text-[12px] md:text-[15px]">
             © {new Date().getFullYear()}{" "}
             <a
-              href="https://github.com/FesoQue"
+              href="https://qdus.netlify.app"
               target={"_blank"}
               rel="noopener noreferrer"
               className="text-[#334155] font-semibold"
