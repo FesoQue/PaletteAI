@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useColorData } from "@/hooks/useColorData";
-import { ClipLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import ErrorHandler from "@/helper/ErrorHandler";
 import { defaultData } from "@/data/defaultdata";
 import { Search, View } from "@/icons/icons";
@@ -13,7 +13,7 @@ import Image from "next/image";
 // import { fetchColorData } from "@/hooks/useColorData";
 
 const Index = () => {
-  const [colorCode, setColorCode] = useState("#FFFAEF");
+  const [colorCode, setColorCode] = useState("#FFB900");
 
   const { data, refetch, isFetching, isError, error } = useColorData(colorCode);
 
@@ -118,10 +118,10 @@ const Index = () => {
           >
             <span className="front text-center">
               {isFetching ? (
-                <ClipLoader
+                <BeatLoader
                   color={"#fff"}
                   loading={isFetching}
-                  size={20}
+                  size={14}
                   aria-label="Loading Spinner"
                 />
               ) : (
