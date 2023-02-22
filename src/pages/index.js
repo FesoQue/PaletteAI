@@ -109,14 +109,15 @@ const Index = () => {
           >
             <span className="front text-center">
               {isFetching ? (
-                <BeatLoader
-                  color={"#fff"}
-                  loading={isFetching}
-                  size={14}
-                  aria-label="Loading Spinner"
-                />
+//                 <BeatLoader
+//                   color={"#fff"}
+//                   loading={isFetching}
+//                   size={14}
+//                   aria-label="Loading Spinner"
+//                 />
+'Please Wait...'
               ) : (
-                "Generate palette"
+                "Generate Palette"
               )}
             </span>
           </button>
