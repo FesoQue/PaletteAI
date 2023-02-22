@@ -81,6 +81,3 @@ Error Color: #FF0000 (Red)
 Color: ${color}
 Guide:`;
 }
-
-// suggest a color system based on any color below with name and hex code. it must include primary color, primary variant, secondary color , secondary variant, Neutral,  background , tint color, shade color, success color, warning color and a error color and a matching gradient color\n
-// Matching Gradient Color: linear-gradient(to right, #009933, #00CC00),

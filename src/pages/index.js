@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { useColorData } from "@/hooks/useColorData";
 import { BeatLoader } from "react-spinners";
 import ErrorHandler from "@/helper/ErrorHandler";
-import { defaultData } from "@/data/defaultdata";
 import { Search, View } from "@/icons/icons";
 import MyDialog from "@/components/Modal";
 import Head from "next/head";
 import { Love } from "@/icons/icons";
-import Link from "next/link";
 import Error from "@/components/Error";
 import Image from "next/image";
-// import { fetchColorData } from "@/hooks/useColorData";
+import { Swirlarrow } from "@/icons/icons";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFB900");
@@ -64,7 +62,6 @@ const Index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     refetch();
-    // await fetchColorData(colorCode);
   };
 
   return (
@@ -72,23 +69,17 @@ const Index = () => {
       <Head>
         <title>PaletteAI</title>
       </Head>
-      {/* <div className="mb-8 pt-9 px-8 ">
-        <Link href={"/"} className="flex justify-end items-center text-lg">
-          Star{" "}
-          <span className="text-[#FFB900] mx-1">
-            <Star />
-          </span>
-          on Github
-        </Link>
-      </div> */}
-      <div className="min-h-[95vh] pt-[70px] ">
+      <div className="min-h-[95vh] pt-[30px] ">
         <div className="text-center mb-8 px-10">
-          <h1 className="text-5xl font-bold mb-2">
-            Palette<span className="text-[#10A37F]">AI</span>
-            <span className="text-4xl">🎨</span>
+          <h1 className="text-[26px] font-bold mb-2 text-gray-600">
+            Palette.<span className="text-[#10A37F]">AI</span>🎨
           </h1>
-          <p className="text-base md:text-lg text-gray-700">
-            Create beautiful color palette using AI.
+          <span className="flex justify-center">
+            <Swirlarrow />
+          </span>
+          <p className="text-[34px] leading-[1.15] md:text-[42px] md:leading-[1.2] font-bold text-gray-700 font-sans">
+            Create your own <br />{" "}
+            <span className="text-[#10A37F]">AI generated</span> color palettes
           </p>
         </div>
         <form
@@ -164,20 +155,7 @@ const Index = () => {
                           background: `${paletteColor}`,
                           overflow: "hidden",
                         }}
-                      >
-                        {/* <div className="flex flex-col justify-end h-full">
-                          <div className="color-card-text">
-                            <p className="font-semibold text-sm uppercase mb-2">
-                              {designName}
-                            </p>
-                            <MyDialog
-                              color={paletteColor}
-                              rgb={convertHexToRgba(paletteColor)}
-                              name={paletteName}
-                            />
-                          </div>
-                        </div> */}
-                      </div>
+                      ></div>
                       <div className="mt-3">
                         <p className="uppercase text-[12px] font-semibold mb-2 text-gray-700">
                           {designName}
