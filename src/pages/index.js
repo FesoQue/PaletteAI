@@ -137,6 +137,7 @@ const Index = () => {
             </>
           ) : (
             <ErrorHandler>
+              {data && <div className="text-center mb-10">copy all colors</div>}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 overflow-hidden">
                 {data?.map((color, i) => {
                   const convertToArr = color?.split(":");
@@ -148,7 +149,7 @@ const Index = () => {
                     .split(")")[0];
 
                   return (
-                    <div key={i} className="zzz p-4 bg-gray-50">
+                    <div key={i} className="palette_card p-4 bg-gray-50">
                       <div
                         className={`w-full min-h-[220px] pb-7 text-center md:pb-8 `}
                         style={{
