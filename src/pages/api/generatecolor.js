@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const payload = {
       model: "text-davinci-003",
       prompt: await generatePrompt(color),
-      temperature: 0,
+      temperature: 0.3,
       max_tokens: 1000,
       top_p: 1,
       frequency_penalty: 0,

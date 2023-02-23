@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useColorData } from "@/hooks/useColorData";
-import { BeatLoader } from "react-spinners";
 import ErrorHandler from "@/helper/ErrorHandler";
-import { Search, View } from "@/icons/icons";
+import { Search } from "@/icons/icons";
 import MyDialog from "@/components/Modal";
 import Head from "next/head";
 import { Love } from "@/icons/icons";
 import Error from "@/components/Error";
 import Image from "next/image";
 import { Swirlarrow } from "@/icons/icons";
+import { Clipboard } from "@/icons/icons";
+import toast, { Toaster } from "react-hot-toast";
 
 const Index = () => {
   const [colorCode, setColorCode] = useState("#FFB900");
@@ -64,6 +65,22 @@ const Index = () => {
     refetch();
   };
 
+  const paletteHexCode = data?.map((color) => {
+    const convertToArr = color?.split(":");
+    return convertToArr[1].split(" ")[1];
+  });
+
+  const allPaletteHexCode = paletteHexCode?.toString();
+
+  const clickToCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success(`copied all colors`);
+    } catch (err) {
+      toast.error("Failed to copy all colors ");
+    }
+  };
+
   return (
     <main className="max-w-[1100px] mx-auto">
       <Head>
@@ -84,7 +101,7 @@ const Index = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="max-w-xl mx-auto mb-20 px-10"
+          className="max-w-xl mx-auto mb-[100px] px-10"
           autoComplete="off"
         >
           <div className="input border-gray-500 w-full mb-6 h-[51px] rounded-[12px] border-1 border bg-whiter flex items-center hover:transition-all ease-in-out">
@@ -108,17 +125,7 @@ const Index = () => {
             disabled={disable}
           >
             <span className="front text-center">
-              {isFetching ? (
-//                 <BeatLoader
-//                   color={"#fff"}
-//                   loading={isFetching}
-//                   size={14}
-//                   aria-label="Loading Spinner"
-//                 />
-'Please Wait...'
-              ) : (
-                "Generate Palette"
-              )}
+              {isFetching ? "Please Wait..." : "Generate Palette"}
             </span>
           </button>
         </form>
@@ -138,7 +145,17 @@ const Index = () => {
             </>
           ) : (
             <ErrorHandler>
-              {data && <div className="text-center mb-10">copy all colors</div>}
+              {data && (
+                <div className="flex justify-center mb-8">
+                  <button
+                    className="flex items-center p-4 bg-[#10a37e1a] text-[#10a37e] font-semibold rounded-full"
+                    onClick={() => clickToCopy(allPaletteHexCode)}
+                  >
+                    <span className="mr-2">{<Clipboard />}</span>
+                    Copy all colors{" "}
+                  </button>
+                </div>
+              )}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-8 overflow-hidden">
                 {data?.map((color, i) => {
                   const convertToArr = color?.split(":");
@@ -208,6 +225,7 @@ const Index = () => {
           </p>
         </div>
       </footer>
+      <Toaster />
     </main>
   );
 };
