@@ -22,7 +22,7 @@ const fetchColorData = async (colorCode) => {
 
 export const useColorData = (colorCode) => {
   return useQuery({
-    queryKey: ["color"],
+    queryKey: ["color", colorCode],
     queryFn: () => fetchColorData(colorCode),
     enabled: false,
     useErrorBoundary: true,
