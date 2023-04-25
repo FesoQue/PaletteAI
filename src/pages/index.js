@@ -125,7 +125,7 @@ const Index = () => {
             disabled={disable}
           >
             <span className="front text-center">
-              {isFetching ? "Please Wait..." : "Generate Palette"}
+              {isFetching ? "Please Wait..." : "Generate Palettes"}
             </span>
           </button>
         </form>
