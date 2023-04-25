@@ -16,6 +16,10 @@ const Index = () => {
 
   const { data, refetch, isFetching, isError, error } = useColorData(colorCode);
 
+  if (isError) {
+    return <h1>Error</h1>;
+  }
+
   function convertHexToRgba(hex) {
     const r = parseInt(hex.substring(1, 3), 16);
     const g = parseInt(hex.substring(3, 5), 16);
