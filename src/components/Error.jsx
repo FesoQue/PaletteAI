@@ -9,7 +9,7 @@ const Error = ({ error, refetch }) => {
       </h1>
       <button
         onClick={() => refetch()}
-        className="bg-[#10a37f] text-white py-2 px-4 text-sm capitalize rounded border border-1 border-gray-400 font-semibold"
+        className="bg-red-600 text-white py-2 px-4 text-sm capitalize rounded border border-1 border-gray-400 font-semibold"
       >
         Try again
       </button>
