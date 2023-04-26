@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())
-      .then((data) => NextResponse.json({ result: data?.choices[0]?.text }));
+      .then((data) => NextResponse.json({ result: data?.choices[0].text }));
   } catch (error) {
     if (error.response) {
       return NextResponse.status(error.response.status).json(
