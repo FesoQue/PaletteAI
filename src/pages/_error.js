@@ -1,10 +1,12 @@
 function Error({ statusCode }) {
   return (
-    <p>
-      {statusCode
-        ? `An error ${statusCode} occurred on server, pls wait while we look into it! 😱`
-        : "An error occurred on client, pls wait while we look into it! 😱"}
-    </p>
+    <div className="h-screen grid place-items-center">
+      <p>
+        {statusCode
+          ? `An error ${statusCode} occurred on server, pls wait while we look into it! 😱`
+          : "An error occurred on client, pls wait while we look into it! 😱"}
+      </p>
+    </div>
   );
 }
 
