@@ -6,8 +6,8 @@ function Error({ statusCode }) {
       <div>
         <p className="mb-5">
           {statusCode
-            ? `An error ${statusCode} occurred on server, pls wait while we look into it! 😱`
-            : "Somethin went wwrong, please wait while we look into it! 😱"}
+            ? `An error ${statusCode} occurred on server! 😱`
+            : "Something went wrong! 😱"}
         </p>
         <button
           onClick={() => window.location.reload()}
